@@ -9,17 +9,17 @@ import Link from "next/link";
 
 const AvailableCars = async () => {
   const carsData = await carsDataApi();
-  const [
-    id,
-    carName,
-    dailyRentPrice,
-    carType,
-    imageURL,
-    seatCapacity,
-    pickupLocation,
-    description,
-    availabilityStatus,
-  ] = carsData;
+  // const [
+  //   id,
+  //   carName,
+  //   dailyRentPrice,
+  //   carType,
+  //   imageURL,
+  //   seatCapacity,
+  //   pickupLocation,
+  //   description,
+  //   availabilityStatus,
+  // ] = carsData;
   return (
    <>
     <h1 className="text-4xl font-bold text-center">Available Cars</h1>
@@ -36,7 +36,7 @@ const AvailableCars = async () => {
                   />
         
                   <span className="absolute top-4 right-4 bg-emerald-500/10 border border-emerald-400/40 backdrop-blur-md text-emerald-400 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest">
-                    {car.availabilityStatus}
+                    {car.availabilityStatus || "UNAVAILABLE"}
                   </span>
                 </div>
         
@@ -89,9 +89,9 @@ const AvailableCars = async () => {
                 </div>
         
                 {/* Description */}
-                <p className="text-xs text-slate-400 leading-relaxed mb-6">
+                {/* <p className="text-xs text-slate-400 leading-relaxed mb-6">
                   {description}
-                </p>
+                </p> */}
         
                 {/* Button */}
                 <Link href={`/exploreCars/${car._id}`}>

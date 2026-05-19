@@ -108,7 +108,7 @@ const RegisterPage = () => {
         </TextField>
 
        
-          <Button type="submit" className='w-full mt-6'>Submit</Button>
+          <Button type="submit" className='w-full py-4 bg-linear-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  mt-6'>Submit</Button>
 
           
      
