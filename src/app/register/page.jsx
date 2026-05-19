@@ -15,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const RegisterPage = () => {
   const {
@@ -24,112 +26,132 @@ const RegisterPage = () => {
   } = useForm();
 
   //email based signup
- 
 
   const handleRegister = async (data) => {
-    const {name, email, password} = data;
+    const { name, email, password } = data;
 
-     const { data:res, error } = await authClient.signUp.email({
-    name: name, // required
-    email: email, // required
-    password: password, // required
+    const { data: res, error } = await authClient.signUp.email({
+      name: name, // required
+      email: email, // required
+      password: password, // required
       //  image: "https://example.com/image.png",
-    callbackURL: "/",
-});
-    // console.log(errors);
-    // console.log(data);
+      callbackURL: "/login",
+    });
+    if (error) {
+      toast.error("Registration failed! " + error.message, {
+        duration: 4000,
+      });
+
+      // console.log("LOGIN ERROR:", error.message || error);
+      return;
+    }
+
+    if (res) {
+      // console.log("LOGIN SUCCESS:", res);
+      toast.success("Registration Successful!👏", {
+        duration: 4000,
+      });
+      redirect("/login");
+      return;
+    }
+  
   };
 
   return (
     <>
-    <div className="flex w-96 flex-col gap-4 mx-auto mt-25 shadow-2xl p-10 rounded-lg">
-      <h1 className="text-4xl font-bold text-center">Register</h1>
-      <Form
-        
-        onSubmit={handleSubmit(handleRegister)}
-      >
-        <TextField isRequired name="email" type="text">
-          <Label>Name</Label>
+      <div className="flex w-96 flex-col gap-4 mx-auto mt-25 shadow-2xl p-10 rounded-lg">
+        <h1 className="text-4xl font-bold text-center">Register</h1>
+        <Form onSubmit={handleSubmit(handleRegister)}>
+          <TextField isRequired name="email" type="text">
+            <Label>Name</Label>
 
-          <Input
-            placeholder="Enter your name"
-            {...register("name", {
-              required: "Name is required",
+            <Input
+              placeholder="Enter your name"
+              {...register("name", {
+                required: "Name is required",
+              })}
+            />
 
-              
-            })}
-          />
+            <FieldError>{errors.email && errors.email.message}</FieldError>
+          </TextField>
+          <TextField isRequired name="email" type="url" className="mt-4">
+            <Label>Photo URL</Label>
 
-          <FieldError>{errors.email && errors.email.message}</FieldError>
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter image URL (optional)"
+              {...register("image")}
+            />
 
-        </TextField>
-        <TextField isRequired name="email" type="url" className='mt-4'>
-          <Label>Photo URL</Label>
+            {/* <p className="text-error">{errors.image?.message || "Make sure to enter a valid image URL."}</p> */}
 
-         <input
-            type="text"
-            className="input"
-            placeholder="Enter image URL (optional)"
-            {...register("image")}
-          />
+            <FieldError>{errors.email && errors.email.message}</FieldError>
+          </TextField>
+          <TextField isRequired name="email" type="email" className="mt-4">
+            <Label>Email</Label>
 
-          {/* <p className="text-error">{errors.image?.message || "Make sure to enter a valid image URL."}</p> */}
+            <Input
+              placeholder="john@example.com"
+              {...register("email", {
+                required: "Email is required",
 
-          <FieldError>{errors.email && errors.email.message}</FieldError>
-        </TextField>
-        <TextField isRequired name="email" type="email" className='mt-4'>
-          <Label>Email</Label>
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email address",
+                },
+              })}
+            />
 
-          <Input
-            placeholder="john@example.com"
-            {...register("email", {
-              required: "Email is required",
+            <FieldError>{errors.email && errors.email.message}</FieldError>
+          </TextField>
 
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email address",
-              },
-            })}
-          />
+          <TextField
+            isRequired
+            name="password"
+            type="password"
+            className="mt-4"
+          >
+            <Label>Password</Label>
 
-          <FieldError>{errors.email && errors.email.message}</FieldError>
-        </TextField>
+            <Input
+              placeholder="Enter your password"
+              {...register("password", {
+                required: "Password is required",
 
-        <TextField isRequired name="password" type="password" className='mt-4'>
-          <Label>Password</Label>
+                minLength: {
+                  value: 6,
+                  message: "Minimum 6 characters required",
+                },
 
-          <Input
-            placeholder="Enter your password"
-            {...register("password", {
-              required: "Password is required",
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                  message: "Must contain 1 uppercase and 1 lowercase letter",
+                },
+              })}
+            />
 
-              minLength: {
-                value: 6,
-                message: "Minimum 6 characters required",
-              },
+            <Description>Must be at least 6 characters</Description>
 
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
-                message: "Must contain 1 uppercase and 1 lowercase letter",
-              },
-            })}
-          />
+            <FieldError>
+              {errors.password && errors.password.message}
+            </FieldError>
+          </TextField>
 
-          <Description>Must be at least 6 characters</Description>
-
-          <FieldError>{errors.password && errors.password.message}</FieldError>
-        </TextField>
-
-       
-          <Button type="submit" className='w-full py-4 bg-linear-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  mt-6'>Submit</Button>
-
-          
-     
-      </Form>
-     <span className="mx-auto text-gray-500">or,</span>
-      <Button variant="outline" className=" w-full"><FcGoogle />Register with google</Button>
-    </div>
-    <p className="text-center my-4 mb-10">
+          <Button
+            type="submit"
+            className="w-full py-4 bg-linear-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  mt-6"
+          >
+            Register
+          </Button>
+        </Form>
+        <span className="mx-auto text-gray-500">or,</span>
+        <Button variant="outline" className=" w-full">
+          <FcGoogle />
+          Register with google
+        </Button>
+      </div>
+      <p className="text-center my-4 mb-10">
         Already have an account?{" "}
         <Link href="/login" className="text-blue-500 hover:underline">
           Login here
