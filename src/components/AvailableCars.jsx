@@ -5,6 +5,7 @@ import React from "react";
 
 import { MdAirlineSeatReclineExtra, MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineSafety } from "react-icons/ai";
+import Link from "next/link";
 
 const AvailableCars = async () => {
   const carsData = await carsDataApi();
@@ -93,9 +94,11 @@ const AvailableCars = async () => {
                 </p>
         
                 {/* Button */}
+                <Link href={`/exploreCars/${car._id}`} carId={car._id}>
                 <button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer">
                   See Details
                 </button>
+                </Link>
               </div>
       ))}
     </div>
