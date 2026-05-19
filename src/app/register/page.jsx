@@ -14,6 +14,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 const RegisterPage = () => {
   const {
@@ -22,9 +23,21 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
-    console.log(errors);
-    console.log(data);
+  //email based signup
+ 
+
+  const handleRegister = async (data) => {
+    const {name, email, password} = data;
+
+     const { data:res, error } = await authClient.signUp.email({
+    name: name, // required
+    email: email, // required
+    password: password, // required
+      //  image: "https://example.com/image.png",
+    callbackURL: "/",
+});
+    // console.log(errors);
+    // console.log(data);
   };
 
   return (
@@ -33,7 +46,7 @@ const RegisterPage = () => {
       <h1 className="text-4xl font-bold text-center">Register</h1>
       <Form
         
-        onSubmit={handleSubmit(handleLogin)}
+        onSubmit={handleSubmit(handleRegister)}
       >
         <TextField isRequired name="email" type="text">
           <Label>Name</Label>

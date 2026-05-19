@@ -14,6 +14,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 const LoginPage = () => {
   const {
@@ -22,10 +23,24 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
-    console.log(errors);
-    console.log(data);
+
+
+  const handleLogin = async (data) => {
+    const {email, password} = data;
+
+    //email based signin
+  const { data:res, error } = await authClient.signIn.email({
+    email: email, // required
+    password: password, // required
+    rememberMe: true,
+    callbackURL: "/",
+    });
+    // console.log(data);
+    // console.log(errors);
   };
+
+
+
 
   return (
     <>
