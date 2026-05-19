@@ -13,7 +13,26 @@ import {
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
+const addData = async (data) => {
+    try{
+      const res =await fetch('http://localhost:5000/exploreCars',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data) 
+
+        
+    })
+    const resData = await res.json();
+    return resData;
+    } 
+    catch(error){
+        console.log("error");
+    }
+}
+
+
 
 const Page = () => {
   const {
@@ -22,7 +41,8 @@ const Page = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
+  const handleAddData = async (data) => {
+   await addData(data);
     console.log(data);
   };
 
@@ -30,7 +50,7 @@ const Page = () => {
     <div>
       <div className="flex max-w-3xl flex-col gap-4 mx-auto mt-20 shadow-2xl p-10 pt-5 rounded-lg">
         <h1 className="text-3xl font-bold text-center">Add a car</h1>
-        <Form onSubmit={handleSubmit(handleLogin)}>
+        <Form onSubmit={handleSubmit(handleAddData)}>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
             {/* Car Name */}
             <TextField isRequired>
