@@ -35,7 +35,9 @@ const Navbar = () => {
             </li>
           </ul>
           <div>
+            <Link href="/login">
             <button className="btn btn-primary">Sign in</button>
+            </Link>
           </div>
         </header>
         {isMenuOpen && (
