@@ -21,6 +21,8 @@ const BookingModal = ({ carData }) => {
   const user = session?.user;
   const userName = user?.name;
   const userEmail = user?.email;
+  const userId = user?.id;
+  // console.log("userId", user);
 
   const myBooking = async (bookingData) => {
     //sending data to backend
@@ -50,6 +52,7 @@ const BookingModal = ({ carData }) => {
   const handleAddData = async (data) => {
     //carData destructuring
     const {
+      
       carName,
       dailyRentPrice,
       carType,
@@ -65,6 +68,7 @@ const BookingModal = ({ carData }) => {
 
     //sending data to backend
     const bookingData = {
+      userId,
       userName,
       userEmail,
       bookingDate,
@@ -158,9 +162,9 @@ const BookingModal = ({ carData }) => {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button variant="secondary">Cancel</Button>
+              <Button slot='close' variant="secondary">Cancel</Button>
 
-              <Button form="booking-form" type="submit">
+              <Button slot='close' form="booking-form" type="submit">
                 Confirm Booking
               </Button>
             </Modal.Footer>

@@ -39,7 +39,7 @@ const Navbar = () => {
               <Link href="/addCar">Add Car</Link>
             </li>
             <li>
-              <Link href="/bookings">My Bookings</Link>
+              <Link href="/myBookings">My Bookings</Link>
             </li>
           </ul>
           <div>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 <Link href="/addCar">Add Car</Link>
               </li>
               <li>
-                <Link href="/bookings">My Bookings</Link>
+                <Link href="/myBookings">My Bookings</Link>
               </li>
             </ul>
           </div>
