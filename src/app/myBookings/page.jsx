@@ -26,6 +26,7 @@ const page = async () => {
 
   return (
     <div className="mt-30">
+      <h1 className="text-4xl font-bold text-center">My Bookings</h1>
       {bookingData?.map((booking) => (
         <div
           key={booking?._id}

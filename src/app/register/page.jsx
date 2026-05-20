@@ -25,6 +25,14 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
+  //google sign in
+    const googleSignIn = async () => {
+      await authClient.signIn.social({
+        provider: "google",
+        // callbackURL: redirect,
+      });
+    };
+
   //email based signup
 
   const handleRegister = async (data) => {
@@ -146,7 +154,7 @@ const RegisterPage = () => {
           </Button>
         </Form>
         <span className="mx-auto text-gray-500">or,</span>
-        <Button variant="outline" className=" w-full">
+        <Button onClick={googleSignIn} variant="outline" className=" w-full">
           <FcGoogle />
           Register with google
         </Button>

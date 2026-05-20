@@ -10,17 +10,7 @@ import Link from "next/link";
 
 const exploreCarPage = async () => {
   const carsData = await carsDataApi();
-  // const [
-  //   id,
-  //   carName,
-  //   dailyRentPrice,
-  //   carType,
-  //   imageURL,
-  //   seatCapacity,
-  //   pickupLocation,
-  //   description,
-  //   availabilityStatus,
-  // ] = carsData;
+  
   return (
     <>
       <h1 className="text-4xl font-bold text-center mt-25 mb-8">

@@ -3,15 +3,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { MdMenuOpen } from "react-icons/md";
 
-
-import { authClient } from "@/lib/auth-client"
-
-
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
-  const { data: session } = authClient.useSession()
-    const user = session?.user ;
-  console.log("user",user);
+  const [open, setOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log("user", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div>
@@ -43,10 +41,47 @@ const Navbar = () => {
             </li>
           </ul>
           <div>
-            <Link href="/login">
-            <button className="btn btn-primary">Sign in</button>
-            </Link>
-            <span className="text-white"> {user?.name}</span>
+            {user ? (
+              <>
+                <div className="relative inline-block">
+                  <button className="btn " onClick={() => setOpen(!open)}>
+                    {user?.name}
+                  </button>
+
+                  {open && (
+                    <div className="absolute top-full mt-2 -left-15 w-40 rounded-xl border border-white/10 bg-slate-900 shadow-xl p-2 z-50">
+                      
+                      <Link href="/myAddedCars">
+                      <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
+                        My added cars
+                      </button>
+                      </Link>
+
+                      <Link href="/myBookings">
+                      <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
+                        My Bookings
+                      </button>
+                      </Link>
+                      
+
+                      <Link
+                        href="/login"
+                        onClick={async () => await authClient.signOut()}
+                        className="btn mx-3"
+                      >
+                        <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg text-red-400">
+                          Logout
+                        </button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <Link href="/login" className="btn mx-3">
+                Sign In
+              </Link>
+            )}
           </div>
         </header>
         {isMenuOpen && (
@@ -59,7 +94,7 @@ const Navbar = () => {
                 <Link href="/exploreCars">Explore Cars</Link>
               </li>
               <li>
-                <Link href="/addCar">Add Car</Link>
+                <Link href="/addCar">Add </Link>
               </li>
               <li>
                 <Link href="/myBookings">My Bookings</Link>
