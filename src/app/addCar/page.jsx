@@ -72,9 +72,9 @@ const Page = () => {
 
               <select
                 className="w-full border rounded-lg p-2 mt-1"
-                {...register("carType", {
-                  required: "Please select a type",
-                })}
+                // {...register("carType", {
+                //   required: "Please select a type",
+                // })}
               >
                 <option value="">Select Type</option>
                 <option value="Sedan">Sedan</option>

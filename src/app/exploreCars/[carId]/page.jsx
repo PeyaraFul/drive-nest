@@ -1,3 +1,5 @@
+import BookingModal from "@/components/BookingModal";
+import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react"; 
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -20,7 +22,6 @@ const CarDetailPage = async ({ params }) => {
 
   return (
     <div className="mt-30">
-      
       <div className="w-full flex flex-wrap md:flex-nowrap     mx-auto max-w-7xl gap-10 bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-5 shadow-2xl relative tracking-wide">
         {/* Image */}
         <div className=" rounded-3xl mx-auto mb-6 border border-white/5">
@@ -103,11 +104,16 @@ const CarDetailPage = async ({ params }) => {
           </p>
 
           {/* Button */}
-          <Link href="g">
+          {/* <Link href="g">
             <button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer">
               Book Now
             </button>
-          </Link>
+          </Link> */}
+
+          <Modal>
+            <Button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer"  >Book Now</Button>
+            <BookingModal carData={carData} />
+          </Modal>
         </div>
       </div>
     </div>

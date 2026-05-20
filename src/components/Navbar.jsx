@@ -3,7 +3,15 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { MdMenuOpen } from "react-icons/md";
 
+
+import { authClient } from "@/lib/auth-client"
+
+
+
 const Navbar = () => {
+  const { data: session } = authClient.useSession()
+    const user = session?.user ;
+  console.log("user",user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div>
@@ -38,6 +46,7 @@ const Navbar = () => {
             <Link href="/login">
             <button className="btn btn-primary">Sign in</button>
             </Link>
+            <span className="text-white"> {user?.name}</span>
           </div>
         </header>
         {isMenuOpen && (
