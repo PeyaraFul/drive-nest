@@ -18,9 +18,8 @@ const page = async () => {
 
   const user = session?.user;
 
-
-  //bookings data getting from backend
-  const res = await fetch(`http://localhost:5000/myBookings/${user?.id}`);
+  //bookings data getting from backend by user id
+  const res = await fetch(`http://localhost:5000/booking/user/${user?.id}`);
   const bookingData = await res.json();
   // console.log("bookingData", bookingData);
 
@@ -138,8 +137,7 @@ const page = async () => {
                       <Button slot="close" variant="secondary">
                         Cancel
                       </Button>
-                       <CancelBookingBtn booking={booking} /> 
-
+                      <CancelBookingBtn booking={booking} />
                     </Modal.Footer>
                   </Modal.Dialog>
                 </Modal.Container>

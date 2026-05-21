@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -14,25 +15,20 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 const addData = async (data) => {
-    try{
-      const res =await fetch('http://localhost:5000/exploreCars',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data) 
-
-        
-    })
+  try {
+    const res = await fetch("http://localhost:5000/car", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     const resData = await res.json();
     return resData;
-    } 
-    catch(error){
-        console.log("error");
-    }
-}
-
-
+  } catch (error) {
+    console.log("error");
+  }
+};
 
 const Page = () => {
   const {
@@ -41,8 +37,33 @@ const Page = () => {
     formState: { errors },
   } = useForm();
 
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const handleAddData = async (data) => {
-   await addData(data);
+    const {
+      carName,
+      carType,
+      imageURL,
+      seatCapacity,
+      pickupLocation,
+      availabilityStatus,
+      description,
+      dailyRentPrice,
+    } = data;
+    const dataToSend = {
+      carName,
+      carType,
+      imageURL,
+      seatCapacity,
+      pickupLocation,
+      dailyRentPrice,
+      availabilityStatus,
+      description,
+      userId: user?.id,
+    };
+    await addData(dataToSend);
+
     console.log(data);
   };
 
@@ -72,9 +93,9 @@ const Page = () => {
 
               <select
                 className="w-full border rounded-lg p-2 mt-1"
-                // {...register("carType", {
-                //   required: "Please select a type",
-                // })}
+                {...register("carType", {
+                  required: "Please select a type",
+                })}
               >
                 <option value="">Select Type</option>
                 <option value="Sedan">Sedan</option>
@@ -124,12 +145,12 @@ const Page = () => {
 
               <Input
                 placeholder="Enter trip location"
-                {...register("tripLocation", {
-                  required: "Trip Location is required",
+                {...register("pickupLocation", {
+                  required: "Pic up Location is required",
                 })}
               />
 
-              <FieldError>{errors.tripLocation?.message}</FieldError>
+              <FieldError>{errors.pickupLocation?.message}</FieldError>
             </TextField>
 
             {/* Availability */}
@@ -171,20 +192,37 @@ const Page = () => {
 
               <FieldError>{errors.description?.message}</FieldError>
             </TextField>
+
+            {/* price */}
+            <TextField isRequired className="mt-4">
+              <Label>Price Per Day</Label>
+
+              <Input
+                type="number"
+                placeholder="Enter price"
+                {...register("dailyRentPrice", {
+                  required: "Price per day is required",
+                })}
+              />
+
+              <FieldError>{errors.price?.message}</FieldError>
+            </TextField>
           </div>
           <div className="flex justify-around gap-15">
-            <Button className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  " type="reset">
-            
-            Reset
-          </Button>
-          <Button className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] " type="submit">
-            Submit
-          </Button>
+            <Button
+              className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  "
+              type="reset"
+            >
+              Reset
+            </Button>
+            <Button
+              className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] "
+              type="submit"
+            >
+              Submit
+            </Button>
           </div>
         </Form>
-        
-
-       
       </div>
     </div>
   );

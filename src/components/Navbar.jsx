@@ -9,7 +9,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log("user", user);
+  // console.log("user", user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div>
@@ -50,19 +50,17 @@ const Navbar = () => {
 
                   {open && (
                     <div className="absolute top-full mt-2 -left-15 w-40 rounded-xl border border-white/10 bg-slate-900 shadow-xl p-2 z-50">
-                      
                       <Link href="/myAddedCars">
-                      <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
-                        My added cars
-                      </button>
+                        <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
+                          My added cars
+                        </button>
                       </Link>
 
                       <Link href="/myBookings">
-                      <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
-                        My Bookings
-                      </button>
+                        <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
+                          My Bookings
+                        </button>
                       </Link>
-                      
 
                       <Link
                         href="/login"

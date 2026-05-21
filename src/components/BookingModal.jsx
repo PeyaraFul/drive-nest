@@ -27,7 +27,7 @@ const BookingModal = ({ carData }) => {
   const myBooking = async (bookingData) => {
     //sending data to backend
     try {
-      const res = await fetch("http://localhost:5000/myBookings", {
+      const res = await fetch("http://localhost:5000/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,6 @@ const BookingModal = ({ carData }) => {
   const handleAddData = async (data) => {
     //carData destructuring
     const {
-      
       carName,
       dailyRentPrice,
       carType,
@@ -162,9 +161,11 @@ const BookingModal = ({ carData }) => {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button slot='close' variant="secondary">Cancel</Button>
+              <Button slot="close" variant="secondary">
+                Cancel
+              </Button>
 
-              <Button slot='close' form="booking-form" type="submit">
+              <Button slot="close" form="booking-form" type="submit">
                 Confirm Booking
               </Button>
             </Modal.Footer>

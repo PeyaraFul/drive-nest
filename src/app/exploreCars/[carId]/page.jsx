@@ -1,7 +1,6 @@
 import BookingModal from "@/components/BookingModal";
-import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react"; 
+import { Button, Modal } from "@heroui/react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { AiOutlineSafety } from "react-icons/ai";
 import { MdAirlineSeatReclineExtra, MdOutlineLocationOn } from "react-icons/md";
@@ -14,11 +13,11 @@ const CarDetailPage = async ({ params }) => {
   const carDetails = async () => {
     const response = await fetch(`http://localhost:5000/exploreCars/${carId}`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data;
   };
   const carData = await carDetails();
-  console.log(carData);
+  // console.log(carData);
 
   return (
     <div className="mt-30">
@@ -111,7 +110,9 @@ const CarDetailPage = async ({ params }) => {
           </Link> */}
 
           <Modal>
-            <Button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer"  >Book Now</Button>
+            <Button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer">
+              Book Now
+            </Button>
             <BookingModal carData={carData} />
           </Modal>
         </div>

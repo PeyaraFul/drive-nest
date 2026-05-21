@@ -1,5 +1,5 @@
 import carsDataApi from "@/lib/carsData";
-import { Chip } from "@heroui/react";
+
 import Image from "next/image";
 import React from "react";
 import fallbackImage from "../../../public/banner-car.png";
@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const exploreCarPage = async () => {
   const carsData = await carsDataApi();
-  
+
   return (
     <>
       <h1 className="text-4xl font-bold text-center mt-25 mb-8">
@@ -27,10 +27,7 @@ const exploreCarPage = async () => {
               <Image
                 width={300}
                 height={300}
-                src={
-                  car?.imageURL ||
-                  fallbackImage
-                }
+                src={car?.imageURL || fallbackImage}
                 alt={car.carName || "No Image"}
                 className="w-full h-full object-cover"
               />
@@ -92,11 +89,6 @@ const exploreCarPage = async () => {
                 </span>
               </div>
             </div>
-
-            {/* Description */}
-            {/* <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                  {description}
-                </p> */}
 
             {/* Button */}
             <Link href={`/exploreCars/${car._id}`}>
