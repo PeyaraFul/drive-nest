@@ -48,8 +48,15 @@ const Navbar = () => {
                     {user?.name}
                   </button>
 
+                  {/* //dropdown menu */}
                   {open && (
                     <div className="absolute top-full mt-2 -left-15 w-40 rounded-xl border border-white/10 bg-slate-900 shadow-xl p-2 z-50">
+                      <Link href="/addCar">
+                        <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
+                          Add Car
+                        </button>
+                      </Link>
+
                       <Link href="/myAddedCars">
                         <button className="w-full text-left px-4 py-2 hover:bg-white/10 rounded-lg">
                           My added cars

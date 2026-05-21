@@ -11,6 +11,7 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -68,163 +69,182 @@ const Page = () => {
   };
 
   return (
-    <div>
-      <div className="flex max-w-3xl flex-col gap-4 mx-auto mt-20 shadow-2xl p-10 pt-5 rounded-lg">
-        <h1 className="text-3xl font-bold text-center">Add a car</h1>
-        <Form onSubmit={handleSubmit(handleAddData)}>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
-            {/* Car Name */}
-            <TextField isRequired>
-              <Label>Car Name</Label>
+    <>
+      {!session ? (
+        <div className="flex justify-center items-center h-screen">
+          Please{" "}
+          <Link
+            className="text-cyan-400 mx-1 hover:text-cyan-300 font-bold"
+            href="/login"
+          >
+            login
+          </Link>{" "}
+          to add a car.
+        </div>
+      ) : (
+        <>
+          <div>
+            <div className="flex max-w-3xl flex-col gap-4 mx-auto mt-20 shadow-2xl p-10 pt-5 rounded-lg">
+              <h1 className="text-3xl font-bold text-center">Add a car</h1>
+              <Form onSubmit={handleSubmit(handleAddData)}>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+                  {/* Car Name */}
+                  <TextField isRequired>
+                    <Label>Car Name</Label>
 
-              <Input
-                placeholder="Enter your car name"
-                {...register("carName", {
-                  required: "Car Name is required",
-                })}
-              />
+                    <Input
+                      placeholder="Enter your car name"
+                      {...register("carName", {
+                        required: "Car Name is required",
+                      })}
+                    />
 
-              <FieldError>{errors.carName?.message}</FieldError>
-            </TextField>
+                    <FieldError>{errors.carName?.message}</FieldError>
+                  </TextField>
 
-            {/* Car Type */}
-            <div className=" w-full">
-              <Label>Car Type</Label>
+                  {/* Car Type */}
+                  <div className=" w-full">
+                    <Label>Car Type</Label>
 
-              <select
-                className="w-full border rounded-lg p-2 mt-1"
-                {...register("carType", {
-                  required: "Please select a type",
-                })}
-              >
-                <option value="">Select Type</option>
-                <option value="Sedan">Sedan</option>
-                <option value="SUV">SUV</option>
-                <option value="Coupe">Coupe</option>
-                <option value="Hatchback">Hatchback</option>
-                <option value="Convertible">Convertible</option>
-                <option value="Luxury">Luxury</option>
-              </select>
+                    <select
+                      className="w-full border rounded-lg p-2 mt-1"
+                      {...register("carType", {
+                        required: "Please select a type",
+                      })}
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Coupe">Coupe</option>
+                      <option value="Hatchback">Hatchback</option>
+                      <option value="Convertible">Convertible</option>
+                      <option value="Luxury">Luxury</option>
+                    </select>
 
-              <p className="text-red-500 text-sm">{errors.carType?.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.carType?.message}
+                    </p>
+                  </div>
+
+                  {/* Image URL */}
+                  <TextField isRequired className="mt-4">
+                    <Label>Photo URL</Label>
+
+                    <Input
+                      type="url"
+                      placeholder="Enter image URL"
+                      {...register("imageURL", {
+                        required: "Image URL is required",
+                      })}
+                    />
+
+                    <FieldError>{errors.imageURL?.message}</FieldError>
+                  </TextField>
+
+                  {/* Seat Capacity */}
+                  <TextField isRequired className="mt-4">
+                    <Label>Seat Capacity</Label>
+
+                    <Input
+                      type="number"
+                      placeholder="Enter seat capacity"
+                      {...register("seatCapacity", {
+                        required: "Seat Capacity is required",
+                      })}
+                    />
+
+                    <FieldError>{errors.seatCapacity?.message}</FieldError>
+                  </TextField>
+
+                  {/* Trip Location */}
+                  <TextField isRequired className="mt-4">
+                    <Label>Trip Location</Label>
+
+                    <Input
+                      placeholder="Enter trip location"
+                      {...register("pickupLocation", {
+                        required: "Pic up Location is required",
+                      })}
+                    />
+
+                    <FieldError>{errors.pickupLocation?.message}</FieldError>
+                  </TextField>
+
+                  {/* Availability */}
+                  <div className="mt-4 w-full">
+                    <Label>Availability</Label>
+
+                    <select
+                      className="w-full border rounded-lg p-2 mt-1"
+                      {...register("availabilityStatus", {
+                        required: "Availability is required",
+                      })}
+                    >
+                      <option value="">Select Availability</option>
+                      <option value="Available">Available</option>
+                      <option value="Unavailable">Unavailable</option>
+                    </select>
+
+                    <p className="text-red-500 text-sm">
+                      {errors.availabilityStatus?.message}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <TextField isRequired className="mt-4 col-span-2">
+                    <Label>Description</Label>
+
+                    <TextArea
+                      placeholder="Enter description"
+                      {...register("description", {
+                        required: "Description is required",
+                        minLength: {
+                          value: 20,
+                          message: "Minimum 20 characters required",
+                        },
+                      })}
+                    />
+
+                    <Description>Must be at least 20 characters</Description>
+
+                    <FieldError>{errors.description?.message}</FieldError>
+                  </TextField>
+
+                  {/* price */}
+                  <TextField isRequired className="mt-4">
+                    <Label>Price Per Day</Label>
+
+                    <Input
+                      type="number"
+                      placeholder="Enter price"
+                      {...register("dailyRentPrice", {
+                        required: "Price per day is required",
+                      })}
+                    />
+
+                    <FieldError>{errors.price?.message}</FieldError>
+                  </TextField>
+                </div>
+                <div className="flex justify-around gap-15">
+                  <Button
+                    className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  "
+                    type="reset"
+                  >
+                    Reset
+                  </Button>
+                  <Button
+                    className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] "
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Form>
             </div>
-
-            {/* Image URL */}
-            <TextField isRequired className="mt-4">
-              <Label>Photo URL</Label>
-
-              <Input
-                type="url"
-                placeholder="Enter image URL"
-                {...register("imageURL", {
-                  required: "Image URL is required",
-                })}
-              />
-
-              <FieldError>{errors.imageURL?.message}</FieldError>
-            </TextField>
-
-            {/* Seat Capacity */}
-            <TextField isRequired className="mt-4">
-              <Label>Seat Capacity</Label>
-
-              <Input
-                type="number"
-                placeholder="Enter seat capacity"
-                {...register("seatCapacity", {
-                  required: "Seat Capacity is required",
-                })}
-              />
-
-              <FieldError>{errors.seatCapacity?.message}</FieldError>
-            </TextField>
-
-            {/* Trip Location */}
-            <TextField isRequired className="mt-4">
-              <Label>Trip Location</Label>
-
-              <Input
-                placeholder="Enter trip location"
-                {...register("pickupLocation", {
-                  required: "Pic up Location is required",
-                })}
-              />
-
-              <FieldError>{errors.pickupLocation?.message}</FieldError>
-            </TextField>
-
-            {/* Availability */}
-            <div className="mt-4 w-full">
-              <Label>Availability</Label>
-
-              <select
-                className="w-full border rounded-lg p-2 mt-1"
-                {...register("availabilityStatus", {
-                  required: "Availability is required",
-                })}
-              >
-                <option value="">Select Availability</option>
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-              </select>
-
-              <p className="text-red-500 text-sm">
-                {errors.availabilityStatus?.message}
-              </p>
-            </div>
-
-            {/* Description */}
-            <TextField isRequired className="mt-4 col-span-2">
-              <Label>Description</Label>
-
-              <TextArea
-                placeholder="Enter description"
-                {...register("description", {
-                  required: "Description is required",
-                  minLength: {
-                    value: 20,
-                    message: "Minimum 20 characters required",
-                  },
-                })}
-              />
-
-              <Description>Must be at least 20 characters</Description>
-
-              <FieldError>{errors.description?.message}</FieldError>
-            </TextField>
-
-            {/* price */}
-            <TextField isRequired className="mt-4">
-              <Label>Price Per Day</Label>
-
-              <Input
-                type="number"
-                placeholder="Enter price"
-                {...register("dailyRentPrice", {
-                  required: "Price per day is required",
-                })}
-              />
-
-              <FieldError>{errors.price?.message}</FieldError>
-            </TextField>
           </div>
-          <div className="flex justify-around gap-15">
-            <Button
-              className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)]  "
-              type="reset"
-            >
-              Reset
-            </Button>
-            <Button
-              className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] "
-              type="submit"
-            >
-              Submit
-            </Button>
-          </div>
-        </Form>
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 
