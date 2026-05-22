@@ -22,6 +22,7 @@ const BookingModal = ({ carData }) => {
   const userName = user?.name;
   const userEmail = user?.email;
   const userId = user?.id;
+  // console.log("userId", carData._id);
   // console.log("userId", user);
 
   const myBooking = async (bookingData) => {
@@ -69,6 +70,7 @@ const BookingModal = ({ carData }) => {
 
     //sending data to backend
     const bookingData = {
+      carId: carData._id,
       userId,
       userName,
       userEmail,
@@ -109,6 +111,7 @@ const BookingModal = ({ carData }) => {
                 {/* Date */}
                 <TextField className="w-full">
                   <Label>Pick a date</Label>
+                  {/* <Label>{carData._id}</Label> */}
 
                   <Input
                     type="date"

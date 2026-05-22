@@ -106,7 +106,7 @@ const CarDetailPage = async ({ params }) => {
                     </div>
 
                     <span className="text-[11px] text-slate-300">
-                      booked by 5users
+                      Booked by {carData.bookedBy ?? 0} users
                     </span>
                   </div>
                   <div className="flex items-center gap-2">

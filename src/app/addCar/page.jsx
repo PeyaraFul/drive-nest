@@ -55,6 +55,7 @@ const Page = () => {
       dailyRentPrice,
     } = data;
     const dataToSend = {
+      bookedBy: 0,
       carName,
       carType,
       imageURL,

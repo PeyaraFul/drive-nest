@@ -1,23 +1,100 @@
-import carsDataApi from "@/lib/carsData";
+"use client";
 
+import carsDataApi from "@/lib/carsData";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import fallbackImage from "../../../public/banner-car.png";
 
 import { MdAirlineSeatReclineExtra, MdOutlineLocationOn } from "react-icons/md";
+
 import { AiOutlineSafety } from "react-icons/ai";
 import Link from "next/link";
+import { FiSearch } from "react-icons/fi";
 
-const exploreCarPage = async () => {
-  const carsData = await carsDataApi();
+const ExploreCarPage = () => {
+  const [carsData, setCarsData] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
+
+  const [search, setSearch] = useState("");
+  const [carType, setCarType] = useState("");
+
+  //  Load all cars
+  useEffect(() => {
+    const loadCars = async () => {
+      const data = await carsDataApi();
+
+      setCarsData(data);
+      setFilteredCars(data);
+    };
+
+    loadCars();
+  }, []);
+
+  useEffect(() => {
+    let filtered = [...carsData];
+
+    // Search
+    if (search.trim() !== "") {
+      filtered = filtered.filter((car) =>
+        car.carName.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    // filtering
+    if (carType !== "") {
+      filtered = filtered.filter((car) => car.carType === carType);
+    }
+
+    setFilteredCars(filtered);
+  }, [search, carType, carsData]);
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center mt-25 mb-8">
-        Available Cars
-      </h1>
-      <div className=" border grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-        {carsData.map((car) => (
+      <h1 className="text-4xl font-bold text-center mt-25 mb-8">All Cars</h1>
+
+      <div className="w-full shadow-md px-4 py-3 mb-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-1 items-center md:mx-30 mx-10 gap-2 border border-gray-200 px-3 py-2 rounded-xl w-full">
+            <FiSearch className="text-gray-500 text-lg" />
+
+            {/* Input */}
+            <input
+              type="text"
+              placeholder="Search cars, brands..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="bg-transparent w-full outline-none text-sm"
+            />
+
+            {/* Filter */}
+            <select
+              value={carType}
+              onChange={(e) => setCarType(e.target.value)}
+              className="border border-gray-200 rounded-lg px-2 py-1 text-sm outline-none"
+            >
+              <option value="">All Types</option>
+              <option value="SUV">SUV</option>
+              <option value="Sedan">Sedan</option>
+              <option value="Coupe">Coupe</option>
+              <option value="Hatchback">Hatchback</option>
+              <option value="Convertible">Convertible</option>
+              <option value="Luxury">Luxury</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4">
+        {filteredCars.length === 0 && (
+          <div className="col-span-full text-center py-20">
+            <h2 className="text-2xl font-bold text-gray-500">No Cars Found</h2>
+
+            <p className="text-gray-400 mt-2">Try another search or filter</p>
+          </div>
+        )}
+
+        {/* Car Cards */}
+        {filteredCars.map((car) => (
           <div
             key={car._id}
             className="w-full mx-auto max-w-sm bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-5 shadow-2xl relative tracking-wide"
@@ -53,6 +130,7 @@ const exploreCarPage = async () => {
                 <span className="text-white text-4xl font-black tracking-tight">
                   ${car.dailyRentPrice}
                 </span>
+
                 <div className="text-[11px] text-slate-400 font-medium mt-0.5">
                   per / day
                 </div>
@@ -75,6 +153,7 @@ const exploreCarPage = async () => {
                 <div className="p-2 bg-white/5 rounded-xl border border-white/5 text-sky-400 shrink-0">
                   <MdAirlineSeatReclineExtra />
                 </div>
+
                 <span className="text-[11px] text-slate-300">
                   {car.seatCapacity} Seats
                 </span>
@@ -84,6 +163,7 @@ const exploreCarPage = async () => {
                 <div className="p-2 bg-white/5 rounded-xl border border-white/5 text-sky-400 shrink-0">
                   <AiOutlineSafety />
                 </div>
+
                 <span className="text-[11px] text-slate-300">
                   Modern safety
                 </span>
@@ -92,7 +172,7 @@ const exploreCarPage = async () => {
 
             {/* Button */}
             <Link href={`/exploreCars/${car._id}`}>
-              <button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] active:scale-[0.99] transition-all duration-200 uppercase cursor-pointer">
+              <button className="w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full uppercase">
                 See Details
               </button>
             </Link>
@@ -103,4 +183,4 @@ const exploreCarPage = async () => {
   );
 };
 
-export default exploreCarPage;
+export default ExploreCarPage;
