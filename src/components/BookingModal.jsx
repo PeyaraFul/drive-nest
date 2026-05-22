@@ -14,8 +14,11 @@ import {
 import { FaCarOn } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const BookingModal = ({ carData }) => {
+  const router = useRouter();
   //current session user data
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -41,7 +44,7 @@ const BookingModal = ({ carData }) => {
 
       return resData;
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
     }
   };
 
@@ -89,6 +92,10 @@ const BookingModal = ({ carData }) => {
 
     //
     await myBooking(bookingData);
+    toast.success("Booking Successful!👏", {
+      duration: 4000,
+    });
+    router.refresh();
   };
 
   return (

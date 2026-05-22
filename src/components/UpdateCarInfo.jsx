@@ -13,6 +13,7 @@ import {
 import { FaCarOn } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const UpdateCarInfo = ({ carData }) => {
   const router = useRouter();
@@ -32,6 +33,9 @@ const UpdateCarInfo = ({ carData }) => {
       body: JSON.stringify(data),
     });
     const resData = await res.json();
+    toast.success("Car Updated Successfully!👏", {
+      duration: 4000,
+    });
     router.refresh();
   };
 

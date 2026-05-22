@@ -72,13 +72,27 @@ const ExploreCarPage = () => {
               onChange={(e) => setCarType(e.target.value)}
               className="border border-gray-200 rounded-lg px-2 py-1 text-sm outline-none"
             >
-              <option value="">All Types</option>
-              <option value="SUV">SUV</option>
-              <option value="Sedan">Sedan</option>
-              <option value="Coupe">Coupe</option>
-              <option value="Hatchback">Hatchback</option>
-              <option value="Convertible">Convertible</option>
-              <option value="Luxury">Luxury</option>
+              <option className="bg-gray-500" value="">
+                All Types
+              </option>
+              <option className="bg-gray-500" value="SUV">
+                SUV
+              </option>
+              <option className="bg-gray-500" value="Sedan">
+                Sedan
+              </option>
+              <option className="bg-gray-500" value="Coupe">
+                Coupe
+              </option>
+              <option className="bg-gray-500" value="Hatchback">
+                Hatchback
+              </option>
+              <option className="bg-gray-500" value="Convertible">
+                Convertible
+              </option>
+              <option className="bg-gray-500" value="Luxury">
+                Luxury
+              </option>
             </select>
           </div>
         </div>

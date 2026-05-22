@@ -15,6 +15,7 @@ import Link from "next/link";
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 const addData = async (data) => {
   try {
     const { data: tokenData } = await authClient.token();
@@ -68,6 +69,10 @@ const Page = () => {
     };
     await addData(dataToSend);
 
+    toast.success("Car Added Successfully!👏", {
+      duration: 4000,
+    });
+
     console.log(data);
   };
 
@@ -115,13 +120,27 @@ const Page = () => {
                         required: "Please select a type",
                       })}
                     >
-                      <option value="">Select Type</option>
-                      <option value="Sedan">Sedan</option>
-                      <option value="SUV">SUV</option>
-                      <option value="Coupe">Coupe</option>
-                      <option value="Hatchback">Hatchback</option>
-                      <option value="Convertible">Convertible</option>
-                      <option value="Luxury">Luxury</option>
+                      <option className="bg-gray-500" value="">
+                        Select Type
+                      </option>
+                      <option className="bg-gray-500" value="Sedan">
+                        Sedan
+                      </option>
+                      <option className="bg-gray-500" value="SUV">
+                        SUV
+                      </option>
+                      <option className="bg-gray-500" value="Coupe">
+                        Coupe
+                      </option>
+                      <option className="bg-gray-500" value="Hatchback">
+                        Hatchback
+                      </option>
+                      <option className="bg-gray-500" value="Convertible">
+                        Convertible
+                      </option>
+                      <option className="bg-gray-500" value="Luxury">
+                        Luxury
+                      </option>
                     </select>
 
                     <p className="text-red-500 text-sm">
@@ -178,14 +197,20 @@ const Page = () => {
                     <Label>Availability</Label>
 
                     <select
-                      className="w-full border rounded-lg p-2 mt-1"
+                      className="w-full  border rounded-lg p-2 mt-1"
                       {...register("availabilityStatus", {
                         required: "Availability is required",
                       })}
                     >
-                      <option value="">Select Availability</option>
-                      <option value="Available">Available</option>
-                      <option value="Unavailable">Unavailable</option>
+                      <option className="bg-gray-500" value="">
+                        Select Availability
+                      </option>
+                      <option className="bg-gray-500" value="Available">
+                        Available
+                      </option>
+                      <option className="bg-gray-500" value="Unavailable">
+                        Unavailable
+                      </option>
                     </select>
 
                     <p className="text-red-500 text-sm">
@@ -238,8 +263,9 @@ const Page = () => {
                   <Button
                     className="mt-6 w-full py-4 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 font-black text-sm tracking-widest rounded-full shadow-[0_4px_25px_rgba(34,211,238,0.25)] "
                     type="submit"
+                    slot="close"
                   >
-                    Submit
+                    Add Car
                   </Button>
                 </div>
               </Form>

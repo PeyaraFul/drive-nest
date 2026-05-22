@@ -159,22 +159,3 @@ const CarDetailPage = async ({ params }) => {
 };
 
 export default CarDetailPage;
-
-// {!session ? (
-//         <div className="flex justify-center items-center h-screen">
-//           Please{" "}
-//           <Link
-//             className="text-cyan-400 mx-1 hover:text-cyan-300 font-bold"
-//             href="/login"
-//           >
-//             login
-//           </Link>{" "}
-//           to add a car.
-//         </div>
-//       ) : (
-//         <>
-//           <div>
-
-//           </div>
-//         </>
-//       )}

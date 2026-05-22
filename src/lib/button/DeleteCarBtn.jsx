@@ -18,6 +18,9 @@ const DeleteCarBtn = ({ carData }) => {
     });
 
     const data = await res.json();
+    toast.success("Car Deleted!", {
+      duration: 4000,
+    });
     router.refresh();
   };
   return (
