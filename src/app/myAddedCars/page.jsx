@@ -24,11 +24,14 @@ const myAddedCarsPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/car/user/${user?.id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVICE_URL}/${user?.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const myCarData = await res.json();
 
   return (

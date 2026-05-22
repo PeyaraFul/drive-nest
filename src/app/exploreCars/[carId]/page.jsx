@@ -30,11 +30,14 @@ const CarDetailPage = async ({ params }) => {
   // console.log("token", token);
 
   const carDetails = async () => {
-    const response = await fetch(`http://localhost:5000/exploreCars/${carId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVICE_URL}/exploreCars/${carId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
 
     const data = await response.json();
     // console.log(data);

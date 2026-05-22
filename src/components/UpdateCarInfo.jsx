@@ -24,14 +24,17 @@ const UpdateCarInfo = ({ carData }) => {
     // console.log(data);
 
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/car/${carData._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${tokenData.token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVICE_URL}/car/${carData._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenData.token}`,
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
     const resData = await res.json();
     toast.success("Car Updated Successfully!👏", {
       duration: 4000,

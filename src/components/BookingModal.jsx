@@ -32,14 +32,17 @@ const BookingModal = ({ carData }) => {
     //sending data to backend
     try {
       const { data: tokenData } = await authClient.token();
-      const res = await fetch("http://localhost:5000/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenData.token}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVICE_URL}/booking`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenData.token}`,
+          },
+          body: JSON.stringify(bookingData),
         },
-        body: JSON.stringify(bookingData),
-      });
+      );
       const resData = await res.json();
 
       return resData;

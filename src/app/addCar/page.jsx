@@ -19,7 +19,8 @@ import toast from "react-hot-toast";
 const addData = async (data) => {
   try {
     const { data: tokenData } = await authClient.token();
-    const res = await fetch("http://localhost:5000/car", {
+    // `${process.env.NEXT_PUBLIC_SERVICE_URL}/${carId}`
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVICE_URL}/car`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,8 +93,8 @@ const Page = () => {
       ) : (
         <>
           <div>
-            <div className="flex max-w-3xl flex-col gap-4 mx-auto mt-20 shadow-2xl p-10 pt-5 rounded-lg">
-              <h1 className="text-3xl font-bold text-center">Add a car</h1>
+            <div className="flex max-w-3xl flex-col gap-4 mx-auto mt-30 shadow-2xl p-10 pt-5 rounded-lg">
+              <h1 className="text-3xl font-bold mb-4 text-center">Add a car</h1>
               <Form onSubmit={handleSubmit(handleAddData)}>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
                   {/* Car Name */}

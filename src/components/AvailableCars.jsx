@@ -12,8 +12,10 @@ const AvailableCars = async () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center">Available Cars</h1>
-      <div className=" border grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <h1 className="text-4xl font-bold text-center mt-25 mb-8">
+        Alvavailable Cars
+      </h1>
+      <div className=" grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {carsData
           .filter(
             (car) => car.availabilityStatus?.toLowerCase() === "available",

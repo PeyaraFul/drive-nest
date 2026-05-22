@@ -13,12 +13,15 @@ const CancelBookingBtn = ({ booking }) => {
     try {
       const { data: tokenData } = await authClient.token();
 
-      const res = await fetch(`http://localhost:5000/booking/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${tokenData.token}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVICE_URL}/booking/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${tokenData.token}`,
+          },
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error("Failed to delete booking");

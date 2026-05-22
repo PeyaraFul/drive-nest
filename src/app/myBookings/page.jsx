@@ -24,11 +24,14 @@ const page = async () => {
       headers: await headers(),
     });
     //bookings data getting from backend by user id
-    const res = await fetch(`http://localhost:5000/booking/user/${user?.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVICE_URL}/booking/user/${user?.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     bookingData = await res.json();
   }
 

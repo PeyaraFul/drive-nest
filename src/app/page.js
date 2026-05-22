@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <>
       <Hero></Hero>
-      <SearchHeaderPage></SearchHeaderPage>
       <AvailableCars></AvailableCars>
       <Section1></Section1>
       <Section2></Section2>

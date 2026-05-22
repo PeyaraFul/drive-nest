@@ -24,7 +24,7 @@ const Navbar = () => {
               <span className="sr-only">Menu</span>
               <MdMenuOpen />
             </button>
-            <div>Logo</div>
+            <div className=" text-2xl font-bold text-blue-500">DriveNest</div>
           </div>
           <ul className="hidden items-center gap-4 md:flex">
             <li>

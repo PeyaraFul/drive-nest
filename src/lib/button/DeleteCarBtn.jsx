@@ -10,7 +10,7 @@ const DeleteCarBtn = ({ carData }) => {
   //sending delete request to backend
   const deleteCar = async (id) => {
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/car/${id}`, {
+    const res = await fetch(`/car/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${tokenData.token}`,
