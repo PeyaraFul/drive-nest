@@ -17,10 +17,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 const addData = async (data) => {
   try {
+    const { data: tokenData } = await authClient.token();
     const res = await fetch("http://localhost:5000/car", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenData.token}`,
       },
       body: JSON.stringify(data),
     });

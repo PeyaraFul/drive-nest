@@ -12,6 +12,7 @@ import {
 } from "@heroui/react";
 import { FaCarOn } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const UpdateCarInfo = ({ carData }) => {
   const router = useRouter();
@@ -19,11 +20,14 @@ const UpdateCarInfo = ({ carData }) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    // console.log(data);
+
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/car/${carData._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenData.token}`,
       },
       body: JSON.stringify(data),
     });

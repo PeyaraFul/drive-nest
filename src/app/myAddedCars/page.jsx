@@ -9,6 +9,10 @@ import { AiOutlineSafety } from "react-icons/ai";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import UpdateCarInfo from "@/components/UpdateCarInfo";
+import { Button, Modal } from "@heroui/react";
+import { IoWarningOutline } from "react-icons/io5";
+import { RiDeleteBinLine } from "react-icons/ri";
+import DeleteCarBtn from "@/lib/button/DeleteCarBtn";
 
 const myAddedCarsPage = async () => {
   const session = await auth.api.getSession({
@@ -32,7 +36,7 @@ const myAddedCarsPage = async () => {
       <h1 className="text-4xl font-bold text-center mt-25 mb-8">
         Available Cars
       </h1>
-      <div className=" border grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <div className="  border grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {myCarData.map((car) => (
           <div
             key={car._id}
@@ -111,8 +115,39 @@ const myAddedCarsPage = async () => {
               {car.description}
             </p>
 
-            {/* Button */}
+            {/* update car button  */}
             <UpdateCarInfo carData={car} />
+
+            {/* delete car modal */}
+            <Modal>
+              <Button className=" w-10 h-10 absolute top-4 bg-black/50 text-red-500 left-4">
+                <RiDeleteBinLine />
+              </Button>
+              <Modal.Backdrop>
+                <Modal.Container>
+                  <Modal.Dialog>
+                    <Modal.CloseTrigger />
+                    <Modal.Header>
+                      <Modal.Icon className="bg-default  text-red-500 ">
+                        <IoWarningOutline />
+                      </Modal.Icon>
+                      <Modal.Heading>
+                        Are you sure to delete this car ?
+                      </Modal.Heading>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>Once you delete the car, you cannot undone.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button slot="close" variant="secondary">
+                        Delete Car
+                      </Button>
+                      <DeleteCarBtn carData={car} />
+                    </Modal.Footer>
+                  </Modal.Dialog>
+                </Modal.Container>
+              </Modal.Backdrop>
+            </Modal>
           </div>
         ))}
       </div>
