@@ -10,9 +10,9 @@ DriveNest is a modern cloud storage and file management platform designed to hel
 
 ## 🌐 Live Demo
 
-* Live Site: https://your-live-link.com
-* Client Repository: https://github.com/your-username/drive-nest
-* Server Repository: https://github.com/your-username/drive-nest-server
+* Live Site: https://drive-nest-omega.vercel.app
+* Client Repository: https://github.com/PeyaraFul/drive-nest
+* Server Repository: https://github.com/PeyaraFul/drive-nest-server
 
 ---
 
