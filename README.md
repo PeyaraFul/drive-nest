@@ -1,3 +1,4 @@
+
 # DriveNest 🚀
 
 DriveNest is a modern cloud storage and file management platform designed to help users securely upload, organize, manage, and access their files through an intuitive and responsive web interface.
@@ -17,6 +18,11 @@ DriveNest is a modern cloud storage and file management platform designed to hel
 ---
 
 ## 📖 Project Overview
+
+
+
+<img width="1918" height="951" alt="image" src="https://github.com/user-attachments/assets/60b6c763-dd6b-454b-a756-6bef7920ce61" />
+
 
 DriveNest provides a seamless file management experience where users can upload, organize, and access their files securely. The platform focuses on usability, performance, and modern UI/UX principles while ensuring a responsive experience across all devices.
 
