@@ -72,10 +72,15 @@ DriveNest provides a seamless file management experience where users can upload,
 next
 react
 react-dom
+@heroui/react
 tailwindcss
+better-auth
 react-icons
 react-hot-toast
-axios
+react-hook-form
+jsonwebtoken
+mongodb
+
 ```
 
 ### Backend Dependencies
@@ -170,7 +175,7 @@ MERN Stack Developer passionate about building scalable and user-friendly web ap
 
 ### Connect With Me
 
-* Portfolio: https://your-portfolio-link.com
+* Portfolio: https://akash-portfolio-three-ashy.vercel.app
 * LinkedIn: https://www.linkedin.com/in/md-akash-mia-bd
 * GitHub: https://github.com/PeyaraFul
 * Email: [arakash022@gmail.com](mailto:arakash022@gmail.com)
