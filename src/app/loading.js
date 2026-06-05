@@ -1,7 +1,7 @@
 import { Spinner } from "@heroui/react";
 import React from "react";
 
-const loading = () => {
+const Loading = () => {
   return (
     <div>
       <div className="flex flex-col items-center gap-2">
@@ -12,4 +12,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;

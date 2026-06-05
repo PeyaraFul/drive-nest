@@ -5,6 +5,7 @@ import SearchHeaderPage from "@/components/SeachField";
 import Section1 from "@/components/Section1";
 import Section2 from "@/components/Section2";
 import Image from "next/image";
+import Loading from "./loading";
 
 export default function Home() {
   return (

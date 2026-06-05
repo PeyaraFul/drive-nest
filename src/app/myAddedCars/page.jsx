@@ -25,7 +25,7 @@ const myAddedCarsPage = async () => {
   });
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVICE_URL}/${user?.id}`,
+    `${process.env.NEXT_PUBLIC_SERVICE_URL}/car/user/${user?.id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const myAddedCarsPage = async () => {
   return (
     <>
       <h1 className="text-4xl font-bold text-center mt-25 mb-8">
-        Available Cars
+        My Added Cars
       </h1>
       <div className="  border grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {myCarData.map((car) => (

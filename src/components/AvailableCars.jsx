@@ -13,7 +13,7 @@ const AvailableCars = async () => {
   return (
     <>
       <h1 className="text-4xl font-bold text-center mt-25 mb-8">
-        Alvavailable Cars
+        Available Cars
       </h1>
       <div className=" grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {carsData
