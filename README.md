@@ -30,7 +30,7 @@ DriveNest provides a seamless file management experience where users can upload,
 
 ## ✨ Key Features
 
-* Secure user authentication and authorization
+
 * Upload and manage files efficiently
 * Organize files in a structured manner
 * Responsive design for mobile, tablet, and desktop devices
