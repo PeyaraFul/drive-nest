@@ -1,7 +1,7 @@
 
 # DriveNest 🚀
 
-DriveNest is a modern cloud storage and file management platform designed to help users securely upload, organize, manage, and access their files through an intuitive and responsive web interface.
+DriveNest is a modern car rental platform designed to help user to find this comfortable car for a spcipic date.
 
 <!-- Project Screenshot -->
 
